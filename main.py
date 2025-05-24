@@ -7,7 +7,7 @@ import os
 import serial
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSlot, QTimer
-from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QStackedWidget)
+from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QStackedWidget, QVBoxLayout)
 import signal
 
 import Chrono
