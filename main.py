@@ -6,7 +6,7 @@ from itertools import cycle
 import serial
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtSlot, QTimer
-from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QStackedWidget)
+from PyQt5.QtWidgets import (QWidget, QApplication, QMainWindow, QStackedWidget, QVBoxLayout)
 import signal
 
 import Chrono
@@ -133,8 +133,8 @@ class Game(QWidget):
             # self.ser = serial.Serial('/dev/ttyUSB0', 19200, timeout=1)
         except:
             try:
-                self.ser = serial.Serial('COM5', 19200, timeout=1)
-                # self.ser = serial.Serial('/dev/ttyUSB1', 19200, timeout=1)
+                # self.ser = serial.Serial('COM5', 19200, timeout=1)
+                self.ser = serial.Serial('/dev/ttyACM0', 19200, timeout=1)
             except Exception as e:
                 raise e
 
