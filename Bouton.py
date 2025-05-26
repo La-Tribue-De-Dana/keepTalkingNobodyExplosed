@@ -24,10 +24,10 @@ def checkBouton(self):
             else: 
                 numChrono = 3
             print(numChrono)
-            if str(numChrono) in gv.chrono[:-1] :
+            if str(numChrono) in gv.chrono :
                 victoire(gv)
             else:
-                print(gv.chrono[:-1])
+                print(gv.chrono)
                 erreur(self, gv)
             gv.boutonNextBande = next(gv.boutonCycleCouleurBande)
 
