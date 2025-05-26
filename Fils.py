@@ -2,7 +2,7 @@ from PyQt5.QtCore import QTimer
 
 
 def initFils(gv):
-    gv.nbFilConnecte = len(gv.ordreFils)
+    gv.nbFilConnecte = len(gv.ordreFils) #Nbr de fils à connecter
     indexFilsConnecte = []  # ex, si 2 fils connecté, on peux avoir le 2ème fils sur le 4ème trou. On aurait alors indexFilsConnecte[1] = 3
     nbFilsCouleur = [0, 0, 0, 0, 0, 0]  # 0 Bleu, 1 Jaune, 2 Blanc, 3 Rouge, 4 Noir, 5 Vert
 
@@ -39,7 +39,7 @@ def initFils(gv):
             print(gv.logiqueMsg)
             gv.filADeco = indexFilsConnecte[1]
 
-        elif "w" in gv.ordreFils[indexFilsConnecte[-1][1]]:
+        elif "w" in gv.ordreFils[indexFilsConnecte[-1]][1]:
             gv.logiqueMsg ="Sinon, si le dernier câble à un fil blanc, débranchez le dernier câble."
             print(gv.logiqueMsg)
 
@@ -100,57 +100,63 @@ def initFils(gv):
     if gv.nbFilConnecte == 4:
         print("4 câbles")
 
-        if "n" in gv.ordreFils[-1][1] and isNumSerieImpair(gv):
-            gv.logiqueMsg ="Si le dernier câble a un fil noir et que le dernier chiffre du numéro de série est impair, débranchez le quatrième câble."
+        if nbFilsCouleur[3] > 1 and isNumSerieImpair(gv):  # Rouge > 1 et numéro impair
+            gv.logiqueMsg = "S'il y a plus d'un fil rouge et si le dernier chiffre du numéro de série est impair, débranchez le dernier câble ayant un fil rouge."
             print(gv.logiqueMsg)
-            gv.filADeco = indexFilsConnecte[3]
-
-        elif nbFilsCouleur[4] == 1 and nbFilsCouleur[4] > 1:
-            gv.logiqueMsg ="Sinon, s'il y a exactement un fil noir et s'il y a plus d'un fil jaune, débranchez le premier câble"
-
-            print(gv.logiqueMsg)
-            gv.filADeco = indexFilsConnecte[0]
-
-        elif nbFilsCouleur[4] == 0 :
-            gv.logiqueMsg ="Sinon, s'il n'y a pas de fil noir, débranchez le second câble."
-            print(gv.logiqueMsg)
-            gv.filADeco = indexFilsConnecte[1]
-
-        else:
-            gv.logiqueMsg ="Sinon, débranchez le premier câble."
-            print(gv.logiqueMsg)
-            gv.filADeco = indexFilsConnecte[0]
-
-
-    if gv.nbFilConnecte == 5:
-        if nbFilsCouleur[1] > 1 and not isNumSerieImpair(gv):
-            gv.logiqueMsg ="Plus de 2 fils Jaune et Dernier chiffre num serie pair"
-            print(gv.logiqueMsg)
-            gv.filADeco = indexFilsConnecte[1]
-
-        elif nbFilsCouleur[5] == 1 and nbFilsCouleur[2] > 1:
-            gv.logiqueMsg = "1 fil vert et plus d'un fil blanc"
-            print(gv.logiqueMsg)
-            gv.filADeco = indexFilsConnecte[3]
-
-        elif nbFilsCouleur[3] > 1 and isNumSerieImpair(gv):
-            gv.logiqueMsg = "Plus d'un fil rouge et Dernier chiffre num serie impair, debranchez deuxième cable ayant un fil bleu"
-            print(gv.logiqueMsg)
-            compteurBleu = 0
-            compteurCable = 0
+            compteurRouge = -1
             for cable in gv.ordreFils:
                 fils = cable[1]
+                if "r" in fils:
+                    compteurRouge += 1
+            gv.filADeco = indexFilsConnecte[compteurRouge]
 
-                if "b" in fils:
-                    compteurBleu += 1
-                    if compteurBleu == 2:
-                        gv.filADeco = indexFilsConnecte[compteurCable]
-                compteurCable += 1
+        elif "j" in gv.ordreFils[indexFilsConnecte[-1]][1] and nbFilsCouleur[3] == 0:  # dernier est jaune et pas de rouge
+            gv.logiqueMsg = "Sinon, si le dernier câble est jaune et qu'il n'y a pas de fil rouge, débranchez le premier câble."
+            print(gv.logiqueMsg)
+            gv.filADeco = indexFilsConnecte[0]
+
+        elif nbFilsCouleur[0] == 1:  # 1 bleu
+            gv.logiqueMsg = "Sinon, s'il y a exactement un fil bleu, débranchez le premier câble."
+            print(gv.logiqueMsg)
+            gv.filADeco = indexFilsConnecte[0]
+
+        elif nbFilsCouleur[1] > 1:  # jaune > 1
+            gv.logiqueMsg = "Sinon, s'il y a plus d'un fil jaune, débranchez le dernier câble."
+            print(gv.logiqueMsg)
+            gv.filADeco = indexFilsConnecte[-1]
 
         else:
-            gv.logiqueMsg =  "Sinon, débrancher le quatrième cable"
+            gv.logiqueMsg = "Sinon, débranchez le deuxième câble."
+            print(gv.logiqueMsg)
+            gv.filADeco = indexFilsConnecte[1]
+
+    if gv.nbFilConnecte == 5:
+        print("5 câbles")
+
+        if "n" in gv.ordreFils[indexFilsConnecte[-1]][1] and isNumSerieImpair(gv):  # dernier est noir + impair
+            gv.logiqueMsg = "Si le dernier câble est noir et si le dernier chiffre du numéro de série est impair, débranchez le quatrième câble."
             print(gv.logiqueMsg)
             gv.filADeco = indexFilsConnecte[3]
+
+        elif nbFilsCouleur[3] == 1 and nbFilsCouleur[1] > 1:  # un rouge + plusieurs jaunes
+            gv.logiqueMsg = "Sinon, s'il y a exactement un fil rouge et plus d'un fil jaune, débranchez le premier câble."
+            print(gv.logiqueMsg)
+            gv.filADeco = indexFilsConnecte[0]
+
+        elif nbFilsCouleur[4] == 0:  # aucun noir
+            gv.logiqueMsg = "Sinon, s'il n'y a pas de fil noir, débranchez le deuxième câble."
+            print(gv.logiqueMsg)
+            gv.filADeco = indexFilsConnecte[1]
+
+        else:
+            gv.logiqueMsg = "Sinon, débranchez le premier câble."
+            print(gv.logiqueMsg)
+            gv.filADeco = indexFilsConnecte[0]
+
+    else:
+        gv.logiqueMsg =  "Sinon, débrancher le quatrième cable"
+        print(gv.logiqueMsg)
+        gv.filADeco = indexFilsConnecte[3]
     gv.indexFilsConnecte = indexFilsConnecte
 
     print("index position filADeco : " + str(gv.filADeco))

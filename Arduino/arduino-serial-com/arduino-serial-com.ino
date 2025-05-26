@@ -123,7 +123,7 @@ void setup() {
 
   pinMode(BoutonContact, INPUT_PULLUP);
 
-  pinMode(chronoSon, INPUT_PULLUP);
+  pinMode(chronoSon, OUTPUT);
 
 
 
@@ -206,6 +206,11 @@ void loop() {
     digitalWrite(filVictoire, data[18]);
     digitalWrite(filErreur, data[19]);
 
+    if data[34] == 1 :
+      tone(chronoSon, 100);
+      delay(1000);
+      noTone(chronoSon);
+
     if(etatLum != 0){
 
       byte lala = data[20] ;
@@ -238,7 +243,7 @@ void loop() {
     digitalWrite(BoutonBandeRouge, data[27]);
     digitalWrite(BoutonBandeVert, data[28]);
     digitalWrite(BoutonBandeBleu, data[29]);
-      
+    
     digitalWrite(chronoErr1, data[30]);
     digitalWrite(chronoErr2, data[31]);
     digitalWrite(chronoErr3, data[32]);

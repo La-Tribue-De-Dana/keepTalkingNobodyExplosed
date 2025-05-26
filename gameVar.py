@@ -54,14 +54,14 @@ class GameVar(metaclass=Singleton):
         self.simonLum = [[0], [0, 3], [0, 3, 2], [0, 3, 2, 1]] # Lumière a affiché (exemple donné ici, la génération se fait dans Simon.initSimon() )
         self.simonSol = [ [[3,2,1,0],[2,3,0,1],[3,0,1,2]]  ,  [[1,3,2,0],[0,2,1,3],[2,3,0,1]] ]  #voyelle, nb erreur, correspondance numero clignotant -> bouton appuyé
         self.simonNbEtape = 5
-        self.filBlanc = ["blanc", ["b","r","v"]] # Bleu, Rouge, Vert
-        self.filBleu = ["bleu", ["b","w","v"]] # Bleu, Blanc (White), Vert
-        self.filMarron = ["marron", ["b","j","r"]] #Bleu, Jaune, Rouge
-        self.filNoir = ["noir", ["n","w","r"]] # Noir, Blanc, Rouge
-        self.filGris = ["gris", ["b","j","w"]] # Bleu, Jaune, Blanc
+        self.filBlanc = ["blanc", ["w"]] # Bleu, Rouge, Vert
+        self.filRouge = ["rouge", ["r"]] # Bleu, Blanc (White), Vert
+        self.filJaune = ["jaune", ["j"]] #Bleu, Jaune, Rouge
+        self.filNoir = ["noir", ["n"]] # Noir, Blanc, Rouge
+        self.filVert = ["vert", ["v"]] # Bleu, Jaune, Blanc
         self.filRien = ["", ""]  # pas de fil
 
-        self.filDispo = [self.filNoir, self.filBlanc,self.filMarron ,self.filGris, self.filBleu]
+        self.filDispo = [self.filBlanc, self.filRouge,self.filJaune ,self.filNoir, self.filVert]
         self.ordreFils = [] # fil placé sur la bombe. Exemple ici, modifiable dans le menu paramètre.
         self.nbFilConnecte = 0 # calculé en fonction du nombre de fils connecté (voir ordreFils)
         self.indexFilsConnecte = []
@@ -98,6 +98,10 @@ class GameVar(metaclass=Singleton):
             'defaite': QSound("assets/Sons/defaite.wav"),
             'victoire': QSound("assets/Sons/win.wav"),
         }
+        
+        self.chronoSonErreur = 0
+        self.level = 0
+        
         self.reset()
 
 
@@ -160,7 +164,9 @@ class GameVar(metaclass=Singleton):
         self.stressPressed = 0
         self.stressModeStarted = 0 # début de la pagaille (demarrage du chrono)
 
-    def sendArduino(self):
+        self.chronoSonErreur = 0        
+
+    def sendArduino(self):       
         msg = ""
         msg += "".join(map(str, self.lumSimon))
         msg += str(self.moduleWin[0])
@@ -186,8 +192,10 @@ class GameVar(metaclass=Singleton):
         msg += "".join(map(str, self.chronoLedErr))
         msg += str(self.chronoBlink)
         msg += str(self.chronoLum)
+        msg += str(self.chronoSonErreur)
 
         msg += "\n"
+                
         return msg
 
     def interprete(self, line):

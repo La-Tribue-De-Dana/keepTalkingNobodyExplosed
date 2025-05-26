@@ -215,58 +215,26 @@ class Setup(QWidget):
             gv.nbPile = 2
             gv.serialNumber = "XD7FSRD/SFPJCMLZ"
             gv.mentionInstalle = ["BOB", "CAR"]
-            gv.ordreFils = [gv.filNoir, gv.filBlanc, gv.filMarron, gv.filGris, gv.filBleu]
+            gv.ordreFils = [gv.filNoir, gv.filRouge, gv.filJaune, gv.filVert, gv.filBlanc]
             gv.modeleBtn = 1
             gv.symboleInstalle = [9, 12, 7, 28]
             gv.chrono = [0, 5, 0, 0, 0]
-            # gv.moduleWin = [1,1,0,0,0]
             gv.moduleWin = [0,0,0,0,0] # Les numeros sont les ateliers disponibles : 0 pour oui et 1 pour non
-            gv.nbErreurMax = 3
+            gv.nbErreurMax = 3.
+            gv.simonNbEtape = 5
+            gv.level = 1
         if lvl == 2 :
             gv.nbPile = 3
             gv.serialNumber = "AG54V6K-DF4SKV5E"
             gv.mentionInstalle = ["FRK", "FRQ"]
-            gv.ordreFils = [gv.filBleu, gv.filRien, gv.filMarron, gv.filGris, gv.filRien]
+            gv.ordreFils = [gv.filRouge, gv.filNoir, gv.filJaune, gv.filJaune]
             gv.modeleBtn = 1
             gv.symboleInstalle = [5, 21, 31, 7]
             gv.chrono = [0, 5, 0, 0, 0]
-            gv.moduleWin = [0,1,0,0,0] # Led verte pour : Simon, ScreenGame, fils, symbole, bouton
+            gv.moduleWin = [0,0,0,0,0] # Led verte pour : Simon, ScreenGame, fils, symbole, bouton
             gv.nbErreurMax = 3
-            gv.simonNbEtape = 3
-        # if lvl == 3 :
-        #     gv.nbPile = 0
-        #     gv.serialNumber = "1547-439-17H3-28"
-        #     gv.mentionInstalle = ["MSA", "TRN"]
-        #     gv.ordreFils = [gv.filRien,gv.Noir, gv.filRien, gv.filGris, gv.filBlanc]
-        #     gv.modeleBtn = 1
-        #     gv.symboleInstalle = [15, 3, 26, 8]
-        #     gv.chrono = [0, 6, 0, 0, 0]
-        #     gv.moduleWin = [0,0,0,0,0] # Led verte pour : Simon, ScreenGame, fils, symbole, bouton
-        #     gv.nbErreurMax = 4
-        #     gv.simonNbEtape = 4
-        # if lvl == 4 :
-        #     gv.nbPile = 4
-        #     gv.serialNumber = "DGH4-HV36-ULM4LV"
-        #     gv.mentionInstalle = ["CAR"]
-        #     gv.ordreFils = [gv.filRien, gv.filRien,gv.filRien, gv.filGris, gv.filBlanc]
-        #     gv.modeleBtn = 1
-        #     gv.symboleInstalle = [31, 21, 22, 4]
-        #     gv.chrono = [0, 4, 3, 0, 0]
-        #     gv.moduleWin = [0,0,0,0,0] # Led verte pour : Simon, ScreenGame, fils, symbole, bouton
-        #     gv.nbErreurMax = 3
-        #     gv.simonNbEtape = 4
-        # if lvl == 5 :
-        #     gv.nbPile = 1
-        #     gv.serialNumber = "1547-439-17H3-28"
-        #     gv.mentionInstalle = ["BOB", "MSA"]
-        #     gv.ordreFils = [gv.filGris, gv.filBlanc,gv.filNoir, gv.filMarron, gv.filBleu]
-        #     gv.modeleBtn = 1
-        #     gv.symboleInstalle = [31, 21, 22, 4]
-        #     gv.chrono = [0, 4, 0, 0, 0]
-        #     gv.moduleWin = [0,0,0,0,0] # Led verte pour : Simon, ScreenGame, fils, symbole, bouton
-        #     gv.nbErreurMax = 2
-        #     gv.simonNbEtape = 5
-        """ Pas besoin de 5 niveaux """
+            gv.simonNbEtape = 5
+            gv.level = 2
         self.mBombe()
 
 

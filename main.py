@@ -93,6 +93,7 @@ class Game(QWidget):
         gv = self.gameVar
         try:
             self.ser.write(gv.sendArduino().encode())
+            self.gameVar.chronoSonErreur = 0
             line = self.ser.readline()
             gv.interprete(line.decode('utf-8').rstrip())
         except Exception as e:
@@ -110,7 +111,9 @@ class Game(QWidget):
     def erreurGlobal(self, module):
         self.gameVar.moduleErr[module] += 1
         self.gameVar.nbErreur = sum(self.gameVar.moduleErr)
-        self.gameVar.sounds["error"].play()
+        # self.gameVar.sounds["error"].play()
+        self.gameVar.chronoSonErreur = 1
+        
 
         if self.gameVar.nbErreur > self.gameVar.nbErreurMax:
             self.defaite()
@@ -120,7 +123,7 @@ class Game(QWidget):
                     self.gameVar.chronoLedErr[i] = 1
                 else:
                     self.gameVar.chronoLedErr[i] = 0
-
+                    
             # if self.gameVar.moduleErr[module] == 1 and module != 5:
             #     Chrono.removeXmMin(self, 3)
             # elif self.gameVar.moduleErr[module] > 1 and module != 5:
@@ -143,8 +146,8 @@ class Game(QWidget):
             # self.ser = serial.Serial('/dev/ttyUSB0', 19200, timeout=1)
         except:
             try:
-                self.ser = serial.Serial('COM5', 19200, timeout=1)
-                # self.ser = serial.Serial('/dev/ttyUSB1', 19200, timeout=1)
+                # self.ser = serial.Serial('COM5', 19200, timeout=1)
+                self.ser = serial.Serial('/dev/ttyACM0', 19200, timeout=1)
             except Exception as e:
                 raise e
 
