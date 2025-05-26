@@ -13,9 +13,15 @@ def checkBouton(self):
 
     if gv.boutonPressed == 1 and gv.boutonRelache == 0:  # Si un bouton est pressé et non relaché, on attend :
         if gv.boutonContact == 0:  # on verifie que le bouton a été relaché avant d'effectuer les actions
-            try:
-                numChrono = gv.BandeNumChrono[str(gv.boutonNextBande)]
-            except:
+            # try:
+            #     numChrono = gv.BandeNumChrono[str(gv.boutonNextBande)]
+            # except:
+            #     numChrono = 3
+            if gv.level == 1 :
+                numChrono = 0 # Bande bleue
+            elif gv.level == 2 :
+                numChrono = 2 # Bande jaune
+            else: 
                 numChrono = 3
             print(numChrono)
             if str(numChrono) in gv.chrono[:-1] :
