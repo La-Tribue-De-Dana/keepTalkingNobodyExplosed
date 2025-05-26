@@ -213,7 +213,7 @@ class Setup(QWidget):
 
         if lvl == 1 :
             gv.nbPile = 2
-            gv.serialNumber = "XD7FSRD/SFPJCMLZ"
+            gv.serialNumber = "XD7FSRD-SFPJCMLZ"
             gv.mentionInstalle = ["BOB", "CAR"]
             gv.ordreFils = [gv.filNoir, gv.filRouge, gv.filJaune, gv.filVert, gv.filBlanc]
             gv.modeleBtn = 1
@@ -221,7 +221,7 @@ class Setup(QWidget):
             gv.chrono = [0, 5, 0, 0, 0]
             gv.moduleWin = [0,0,0,0,0] # Les numeros sont les ateliers disponibles : 0 pour oui et 1 pour non
             gv.nbErreurMax = 3.
-            gv.simonNbEtape = 5
+            gv.simonNbEtape = 4
             gv.level = 1
         if lvl == 2 :
             gv.nbPile = 3
