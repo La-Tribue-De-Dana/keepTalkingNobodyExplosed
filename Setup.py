@@ -218,9 +218,9 @@ class Setup(QWidget):
             gv.ordreFils = [gv.filNoir, gv.filRouge, gv.filJaune, gv.filVert, gv.filBlanc]
             gv.modeleBtn = 1
             gv.symboleInstalle = [9, 12, 7, 28]
-            gv.chrono = [0, 5, 0, 0, 0]
+            gv.chrono = [0, 8, 0, 0, 0]
             gv.moduleWin = [0,0,0,0,0] # Les numeros sont les ateliers disponibles : 0 pour oui et 1 pour non
-            gv.nbErreurMax = 3.
+            gv.nbErreurMax = 3
             gv.simonNbEtape = 4
             gv.level = 1
         if lvl == 2 :
@@ -230,10 +230,10 @@ class Setup(QWidget):
             gv.ordreFils = [gv.filRouge, gv.filNoir, gv.filJaune, gv.filJaune]
             gv.modeleBtn = 1
             gv.symboleInstalle = [5, 21, 31, 7]
-            gv.chrono = [0, 5, 0, 0, 0]
+            gv.chrono = [0, 6, 0, 0, 0]
             gv.moduleWin = [0,0,0,0,0] # Led verte pour : Simon, ScreenGame, fils, symbole, bouton
             gv.nbErreurMax = 3
-            gv.simonNbEtape = 5
+            gv.simonNbEtape = 4
             gv.level = 2
         self.mBombe()
 

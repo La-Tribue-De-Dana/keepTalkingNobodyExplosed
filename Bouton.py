@@ -18,9 +18,9 @@ def checkBouton(self):
             # except:
             #     numChrono = 3
             if gv.level == 1 :
-                numChrono = [0, 0, 1] # Bande bleue
+                numChrono = 4 # Bande bleue
             elif gv.level == 2 :
-                numChrono = [0, 1, 0] # Bande jaune
+                numChrono = 5 # Bande jaune
             else: 
                 numChrono = 3
             print(numChrono)
