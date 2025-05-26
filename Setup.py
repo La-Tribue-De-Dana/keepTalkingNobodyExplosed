@@ -36,13 +36,13 @@ class Setup(QWidget):
         self.menu = 0
         self.lastSymClicked = -1
         self.lineEdit = QTextEdit()
-        font = self.lineEdit.font()  # lineedit current font
+        font = self.lineEdit.font()
+        self.lineEdit.setReadOnly(True)  # lineedit current font
         font.setPointSize(20)  # change it's size
         self.lineEdit.setFont(font)
         self.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
-        self.lineEdit.setFixedHeight(100)
-        self.lineEdit.setFixedWidth(400)
-        self.lineEdit.setStyleSheet("border: 1px solid #1e1e1e;")
+        self.lineEdit.setFixedHeight(70)
+        self.lineEdit.setFixedWidth(300)
         self.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
 
         if (self.gameVar.serialOK == 0):
@@ -57,7 +57,7 @@ class Setup(QWidget):
                 btn.setMaximumHeight(400)
                 btn.setFixedHeight(100)
                 f = btn.font()
-                f.setPointSize(18)
+                f.setPointSize(13)
                 btn.setFont(f)
                 self.btns.append(btn)
                 box.addWidget(btn)
@@ -104,7 +104,7 @@ class Setup(QWidget):
 
         self.lineEdit.setText(msg)
         self.btns[0].setText("pile : " + str(self.gameVar.nbPile))
-        self.btns[1].setText("SeN : " + str(self.gameVar.serialNumber[:5]) + "...")
+        self.btns[1].setText("S/N : " + str(self.gameVar.serialNumber[:5]) + "...")
         self.btns[2].setText("Symb : " + str(self.gameVar.symboleInstalle[0]) + "   " + str(self.gameVar.symboleInstalle[1]) + " \n            " + str(self.gameVar.symboleInstalle[3]) + "    " + str(self.gameVar.symboleInstalle[2]))
         self.btns[3].setText("Bouton :\n" +  str(self.gameVar.listeBouton[self.gameVar.modeleBtn]))
 
@@ -151,9 +151,9 @@ class Setup(QWidget):
 
         for btn in self.btns :
             btn.setText("")
+            btn.setFixedHeight(60)
             btn.clicked.connect(self.mRien)
             btn.clicked.disconnect()
-
         self.repaint()
 
 
@@ -181,7 +181,7 @@ class Setup(QWidget):
     @pyqtSlot()
     def mPrincipal(self):
         self.resetBtn()
-        self.lineEdit.setText("Menu Principal")
+        self.lineEdit.setText("Menu principal")
         self.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
 
         self.btns[0].setText("Paramètres")
@@ -190,9 +190,9 @@ class Setup(QWidget):
 
         self.btns[1].setText("Voir\nParamètres")
         self.btns[1].clicked.connect(self.mParametreInstalle)
-        self.btns[2].setText("niveau 1")
+        self.btns[2].setText("Niveau 1")
         self.btns[2].clicked.connect(lambda : self.niveau(1))
-        self.btns[3].setText("niveau 2")
+        self.btns[3].setText("Niveau 2")
         self.btns[3].clicked.connect(lambda: self.niveau(2))
         # self.btns[4].setText("niveau 3")
         # self.btns[4].clicked.connect(lambda: self.niveau(3))
@@ -213,7 +213,7 @@ class Setup(QWidget):
 
         if lvl == 1 :
             gv.nbPile = 2
-            gv.serialNumber = "XD7FSRDeSFPJCMLZ"
+            gv.serialNumber = "XD7FSRD/SFPJCMLZ"
             gv.mentionInstalle = ["BOB", "CAR"]
             gv.ordreFils = [gv.filNoir, gv.filRouge, gv.filJaune, gv.filVert, gv.filBlanc]
             gv.modeleBtn = 1

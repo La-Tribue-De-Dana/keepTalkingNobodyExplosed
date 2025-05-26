@@ -2,6 +2,7 @@ import getopt
 import random
 import sys
 from itertools import cycle
+import os
 
 import serial
 from PyQt5 import QtCore
@@ -23,7 +24,7 @@ import Symbole
 from Bouton import checkBouton
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 class MainWindow(QMainWindow):
 
@@ -48,13 +49,25 @@ class MainWindow(QMainWindow):
         self.stackSetup.addWidget(self.bios)
         self.stackSetup.addWidget(self.win)
         self.stackSetup.addWidget(self.desamorcage)
-        self.bios.setStyleSheet("border-image: url(assets/Images/biosurgence.png) 0 0 0 0 stretch stretch");
-        self.desamorcage.setStyleSheet("border-image: url(assets/Images/desamorcage.png) 0 0 0 0 stretch stretch");
+        self.bios.setStyleSheet("border-image: url(assets/Images/biosurgence.png) 0 0 0 0 stretch stretch")
+        self.desamorcage.setStyleSheet("border-image: url(assets/Images/desamorcage.png) 0 0 0 0 stretch stretch")
 
-        self.setGeometry(0, 0, 480, 720)
+        # Fixe la taille de la zone de jeu
+        self.setFixedSize(320, 480)
 
-        self.setCentralWidget(self.stackSetup)
+        # Widget conteneur avec layout vertical pour centrer verticalement
+        container = QWidget()
+        layout = QVBoxLayout()
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.addStretch()
+        layout.addWidget(self.stackSetup, alignment=QtCore.Qt.AlignHCenter)
+        layout.addStretch()
+        container.setLayout(layout)
 
+        self.setCentralWidget(container)
+        self.setStyleSheet("background-color: black;")  # Fond noir autour
+
+        self.showFullScreen()  # Plein écran (cache barre LXDE)
 
 
 class Game(QWidget):
@@ -262,24 +275,24 @@ class Game(QWidget):
 
 
 if __name__ == "__main__":
-    fullScreen = False
+    fullScreen = True
     try:
         opts, args = getopt.getopt(sys.argv[1:], "f")
     except getopt.GetoptError:
         print("Option inconnu")
         sys.exit(2)
 
-    for opt, arg in opts:
-        print(opt)
-        if opt == '-f':
-            fullScreen = True
+    #for opt, arg in opts:
+    #    print(opt)
+    #    if opt == '-f':
+    #        fullScreen = True
 
     app = QApplication.instance()
     if not app:
         app = QApplication(sys.argv)
 
     m = MainWindow()
-    if fullScreen :
+    if fullScreen:
         m.showFullScreen()
     else:
         m.show()
