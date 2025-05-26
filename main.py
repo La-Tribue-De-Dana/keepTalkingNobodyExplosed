@@ -123,7 +123,9 @@ class Game(QWidget):
                     self.gameVar.chronoLedErr[i] = 1
                 else:
                     self.gameVar.chronoLedErr[i] = 0
-                    
+            
+            Chrono.removeXmMin(self, 1)
+            #     Chrono.removeXmMin(self, 1)      
             # if self.gameVar.moduleErr[module] == 1 and module != 5:
             #     Chrono.removeXmMin(self, 3)
             # elif self.gameVar.moduleErr[module] > 1 and module != 5:
