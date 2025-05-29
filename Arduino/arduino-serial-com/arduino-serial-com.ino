@@ -10,7 +10,7 @@
 #define	chronoErr2	12
 #define	chronoErr1	13
 
-#define	chronoSon	17
+#define	chronoSon	9
 #define	symboleLum3	18
 #define	symboleLum2	19
 #define	symboleLum1	20
@@ -123,7 +123,7 @@ void setup() {
 
   pinMode(BoutonContact, INPUT_PULLUP);
 
-  pinMode(chronoSon, OUTPUT);
+  pinMode(chronoSon, INPUT_PULLUP);
 
 
 
@@ -169,12 +169,12 @@ void setup() {
   digitalWrite(chronoErr2, 1);
   digitalWrite(chronoErr3, 1);
   digitalWrite(chronoErr4, 1);
-  
+
 }
 void loop() {
   
   if (Serial.available() > 0) {
-
+0
     String data = Serial.readStringUntil('\n');
 
     // Traitement Sortie
@@ -206,11 +206,14 @@ void loop() {
     digitalWrite(filVictoire, data[18]);
     digitalWrite(filErreur, data[19]);
 
-    if data[34] == 1 :
-      tone(chronoSon, 100);
-      delay(1000);
-      noTone(chronoSon);
-
+    
+    if(data[36] == 1){;  // Toujours en OUTPUT pour le son
+      tone(chronoSon, 100);    
+      delay(300);
+    } else {
+      tone(chronoSon,22000);           // Arrête le son
+    }
+      
     if(etatLum != 0){
 
       byte lala = data[20] ;
