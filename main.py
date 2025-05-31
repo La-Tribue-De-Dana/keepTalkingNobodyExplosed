@@ -143,15 +143,20 @@ class Game(QWidget):
 
     def initSerial(self):
         self.ser = ""
-        try:
-            self.ser = serial.Serial('COM5', 19200, timeout=1)
-            # self.ser = serial.Serial('/dev/ttyUSB0', 19200, timeout=1)
-        except:
+        ports = ['/dev/ttyACM0', '/dev/ttyUSB0', 'COM5']  # ordre de tentative
+
+        for port in ports:
             try:
-                # self.ser = serial.Serial('COM5', 19200, timeout=1)
-                self.ser = serial.Serial('/dev/ttyACM0', 19200, timeout=1)
+                self.ser = serial.Serial(port, 19200, timeout=1)
+                print(f"Connecté sur {port}")
+                break
             except Exception as e:
-                raise e
+                print(f"Échec de connexion sur {port} : {e}")
+                self.ser = None
+
+        if not self.ser or not self.ser.is_open:
+            raise Exception("Impossible de se connecter à aucun port série.")
+
 
         # Envoi à l'arduino de 14 bit à 1 : 11111111111111
         print(self.ser.write("initialisation\n".encode()))
