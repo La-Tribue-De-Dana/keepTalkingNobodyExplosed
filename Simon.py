@@ -2,7 +2,7 @@ from PyQt5.QtCore import QTimer
 import random
 
 def initSimon(gv):
-    print("DEBUT -------------- Séquences Simon générées :", gv.simonLum)
+    # print("DEBUT -------------- Séquences Simon générées :", gv.simonLum)
 
     gv.simonLum = []
     randomList = []
@@ -14,6 +14,7 @@ def initSimon(gv):
             gv.simonLum[i].append(randomList[j])
 
     print("simonLum " + str(gv.simonLum))
+    print("Random List", str(randomList))
     print("serialNumber.lower " + gv.serialNumber.lower())
     for voyelle in "aeiouy" :
         if voyelle in gv.serialNumber.lower():

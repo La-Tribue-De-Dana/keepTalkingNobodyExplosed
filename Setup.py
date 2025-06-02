@@ -227,7 +227,7 @@ class Setup(QWidget):
             gv.nbPile = 3
             gv.serialNumber = "AG54V6K-DF4SKV5E"
             gv.mentionInstalle = ["FRK", "FRQ"]
-            gv.ordreFils = [gv.filRouge, gv.filNoir, gv.filJaune, gv.filJaune]
+            gv.ordreFils = [gv.filRouge, gv.filBlanc , gv.filJaune, gv.filVert,gv.filNoir]
             gv.modeleBtn = 1
             gv.symboleInstalle = [5, 21, 31, 7]
             gv.chrono = [0, 6, 0, 0, 0]
